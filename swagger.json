@@ -163,8 +163,8 @@
                                                     "nombre": {"type": "string"},
                                                     "descripcion_ventas": {"type": "string"},
                                                     "categoria": {"type": "string"},
-                                                    "stock_furgoneta": {"type": "float"},
-                                                    "stock_almacen": {"type": "float"}
+                                                    "stock_furgoneta": {"type": "number"},
+                                                    "stock_almacen": {"type": "number"}
                                                 }
                                             }
                                         }
@@ -221,7 +221,7 @@
                                                 "type": "object",
                                                 "properties": {
                                                     "product_id": {"type": "integer"},
-                                                    "price": {"type": "float"}
+                                                    "price": {"type": "number"}
                                                 }
                                             }
                                         }
@@ -287,7 +287,7 @@
                                                 "type": "object",
                                                 "properties": {
                                                     "product_id": {"type": "integer"},
-                                                    "price": {"type": "float"}
+                                                    "price": {"type": "number"}
                                                 }
                                             }
                                         }
