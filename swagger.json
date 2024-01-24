@@ -1,0 +1,63 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Agatex Odoo API",
+        "description": "Puntos de acceso REST personalizados",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://testpont.endeos.net"
+        }
+    ],
+    "paths": {
+        "/api/v1/test/auth": {
+            "post": {
+                "summary": "Comprobar datos de autenticación de un usuario",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": ["api_key", "agent_user", "password"],
+                                "properties": {
+                                    "api_key": {"type": "string"},
+                                    "agent_user": {"type": "string"},
+                                    "password": {"type": "string"}
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Autenticación válida",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "autenticado": {"type": "boolean"},
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "description": "Autenticación inválida",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {"type": "string"}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
