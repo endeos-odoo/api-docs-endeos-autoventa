@@ -19,9 +19,8 @@
                         "application/json": {
                             "schema": {
                                 "type": "object",
-                                "required": ["api_key", "agent_user", "password"],
+                                "required": ["agent_user", "password"],
                                 "properties": {
-                                    "api_key": {"type": "string"},
                                     "agent_user": {"type": "string"},
                                     "password": {"type": "string"}
                                 }
@@ -37,7 +36,9 @@
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "autenticado": {"type": "boolean"}
+                                        "autenticado": {"type": "boolean"},
+                                        "agent_id": {"type": "integer"},
+                                        "api_key": {"type": "string"}
                                     }
                                 }
                             }
