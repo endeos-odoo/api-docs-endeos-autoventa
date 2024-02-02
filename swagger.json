@@ -255,7 +255,7 @@
                         "name": "partner_id",
                         "in": "path",
                         "schema": {
-                            "type": "integer",
+                            "type": "integer"
                         },
                         "description": "ID de contacto",
                         "required": true
