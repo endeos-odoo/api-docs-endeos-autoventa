@@ -1,319 +1,81 @@
 {
     "openapi": "3.0.2",
     "info": {
-        "title": "ENDEOS - Autoventa API",
-        "description": "Puntos de acceso REST personalizados",
-        "version": "1.0.0"
+      "title": "ENDEOS - Autoventa API",
+      "description": "Puntos de acceso REST personalizados",
+      "version": "1.0.0"
     },
     "servers": [
-        {
-            "url": "https://testpont.endeos.net"
-        }
+      {
+        "url": "https://endeos-xcorbella-api-odoo17-test-15641564.dev.odoo.com",
+        "variables": {},
+        "description": "api odoo-17 test"
+      }
     ],
     "paths": {
-        "/api/v1/test/auth": {
-            "post": {
-                "summary": "Comprobar datos de autenticación de un usuario",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "required": ["agent_user", "password"],
-                                "properties": {
-                                    "agent_user": {"type": "string"},
-                                    "password": {"type": "string"}
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Autenticación válida",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "autenticado": {"type": "boolean"},
-                                        "agent_id": {"type": "integer"},
-                                        "api_key": {"type": "string"}
-                                    }
-                                }
-                            }
-                        }
+      "/api/v1/test/auth": {
+        "post": {
+          "summary": "Autenticación de usuario",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "user",
+                    "password"
+                  ],
+                  "properties": {
+                    "user": {
+                      "type": "string"
                     },
-                    "4XX": {
-                        "description": "Autenticación inválida",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "errors": {"type": "string"}
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/test/customers": {
-            "post": {
-                "summary": "Obtener clientes de un agente",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "required": ["api_key", "agent_id"],
-                                "properties": {
-                                    "api_key": {"type": "string"},
-                                    "agent_id": {"type": "integer"},
-                                    "company_id": {"type": "integer"}
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Listado de clientes del agente",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "clientes": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "id": {"type": "integer"},
-                                                    "referencia": {"type": "string"},
-                                                    "nombre": {"type": "string"},
-                                                    "nombre_comercial": {"type": "string"},
-                                                    "direccion_calle": {"type": "string"},
-                                                    "direccion_ciudad": {"type": "string"},
-                                                    "direccion_cp": {"type": "string"},
-                                                    "direccion_provincia": {"type": "string"},
-                                                    "direccion_pais": {"type": "string"},
-                                                    "nif": {"type": "string"},
-                                                    "telefono": {"type": "string"},
-                                                    "movil": {"type": "string"},
-                                                    "email": {"oneOf": [{"type": "string"}, {"type": "boolean"}]}
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                    "password": {
+                      "type": "string"
                     },
-                    "4XX": {
-                        "description": "Error al intentar obtener los clientes del agente",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "errors": {"type": "string"}
-                                    }
-                                }
-                            }
-                        }
+                    "db": {
+                      "type": "string"
                     }
+                  }
                 }
+              }
             }
-        },
-        "/api/v1/test/products": {
-            "post": {
-                "summary": "Obtener productos",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "required": ["api_key", "agent_id"],
-                                "properties": {
-                                    "api_key": {"type": "string"},
-                                    "agent_id": {"type": "integer"},
-                                    "company_id": {"type": "integer"}
-                                }
-                            }
-                        }
+          },
+          "responses": {
+            "200": {
+              "description": "Autenticación válida",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "autenticado": {
+                        "type": "boolean"
+                      },
+                      "api_key": {
+                        "type": "string"
+                      }
                     }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Listado de productos",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "productos": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "id": {"type": "integer"},
-                                                    "referencia": {"oneOf": [{"type": "string"}, {"type": "boolean"}]},
-                                                    "nombre": {"type": "string"},
-                                                    "descripcion_ventas": {"type": "string"},
-                                                    "categoria": {"type": "string"},
-                                                    "stock_furgoneta": {"type": "number"},
-                                                    "stock_almacen": {"type": "number"}
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "4XX": {
-                        "description": "Error al intentar obtener los productos",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "errors": {"type": "string"}
-                                    }
-                                }
-                            }
-                        }
-                    }
+                  }
                 }
-            }
-        },
-        "/api/v1/public/pricelist": {
-            "post": {
-                "summary": "Tarifa de precios pública",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "required": ["api_key", "agent_id"],
-                                "properties": {
-                                    "api_key": {"type": "string"},
-                                    "agent_id": {"type": "integer"},
-                                    "company_id": {"type": "integer"}
-                                }
-                            }
-                        }
+              }
+            },
+            "4XX": {
+              "description": "Autenticación inválida",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "errors": {
+                        "type": "string"
+                      }
                     }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Listado de precios de producto",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "tarifa": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "product_id": {"type": "integer"},
-                                                    "price": {"type": "number"}
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "4XX": {
-                        "description": "Error al intentar obtener tarifa pública",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "errors": {"type": "string"}
-                                    }
-                                }
-                            }
-                        }
-                    }
+                  }
                 }
+              }
             }
-        },
-        "/api/v1/test/partner/{partner_id}/pricelist": {
-            "post": {
-                "summary": "Tarifa de precios en tarifa de un cliente",
-                "parameters": [
-                    {
-                        "name": "partner_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "description": "ID de contacto",
-                        "required": true
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "required": ["api_key", "agent_id"],
-                                "properties": {
-                                    "api_key": {"type": "string"},
-                                    "agent_id": {"type": "integer"},
-                                    "company_id": {"type": "integer"}
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Listado de precios en tarifa de un cliente",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "tarifa_cliente": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "product_id": {"type": "integer"},
-                                                    "price": {"type": "number"}
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "4XX": {
-                        "description": "Error al intentar obtener tarifa de cliente",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "errors": {"type": "string"}
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+          }
         }
+      }
     }
-}
+  }
