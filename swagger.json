@@ -13,7 +13,7 @@
       }
     ],
     "paths": {
-      "/api/v1/test/auth": {
+      "/api/v1/auth": {
         "post": {
           "summary": "Autenticación de usuario",
           "requestBody": {
